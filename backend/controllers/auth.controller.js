@@ -9,13 +9,13 @@ export const signup = async (req, res) => {
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
-      return res.status(400).json({ message: "Username already exists" });
+      return res.status(400).json({ error: "Username already exists" });
     }
 
     if (password !== confirmPassword) {
       return res
         .status(400)
-        .json({ message: "Password must be same as confirm password" });
+        .json({ error: "Password must be same as confirm password" });
     }
 
     // hash password
@@ -46,7 +46,7 @@ export const signup = async (req, res) => {
         profileImg: newUser.profileImg,
       });
     } else {
-      return res.status(400).json({ message: "Invalid user!!" });
+      return res.status(400).json({ error: "Invalid user!!" });
     }
   } catch (error) {
     console.log("Error in signup controller: ", error.message);
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
     );
 
     if (!user || !isPasswordMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
     generateTokenAndSetCookie(user._id, res); // 產生 token 並設置 cookie

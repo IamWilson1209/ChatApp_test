@@ -7,8 +7,9 @@ import messageRoutes from "./routes/message.route.js";
 import userRoutes from "./routes/user.route.js";
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
+import { app, server } from "./socket/socket.js";
 
-const app = express();
+// const app = express();
 
 dotenv.config(); // Load environment variables from.env file
 const PORT = process.env.PORT || 8000; // Set the port to 3000 or the environment variable PORT if defined
@@ -18,10 +19,10 @@ app.use(cookieParser()); // Middleware to parse cookies
 
 // Create routes
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server running on port ${PORT}`);
 });
