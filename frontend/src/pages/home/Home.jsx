@@ -1,4 +1,4 @@
-import Sidebar from "../../components/sidebar/Sidebar.jsx"
+import Sidebar from "./Sidebar.jsx"
 import MessageContainer from "../../components/messages/MessageContainer.jsx"
 
 const Home = () => {
